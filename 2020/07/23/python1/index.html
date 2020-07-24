@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Happy and Suffering Time</title>
+  <title>爬虫（一） | Happy and Suffering Time</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Happy and Suffering Time">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="引言​    今天开始学习python中的request库进而开始学习数据爬取数据（爬虫），俗话说的好：~ 爬虫学的好，坐牢做到老 ~ 。出于兴趣我开始阅读官方文档深入了解一下这些库。作者无法将一个库讲的十分全面，这篇文章先对get请求进行介绍。如有疏漏 ，请多多包涵。官方库传送门">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬虫（一）">
+<meta property="og:url" content="http://yoursite.com/2020/07/23/python1/index.html">
 <meta property="og:site_name" content="Happy and Suffering Time">
+<meta property="og:description" content="引言​    今天开始学习python中的request库进而开始学习数据爬取数据（爬虫），俗话说的好：~ 爬虫学的好，坐牢做到老 ~ 。出于兴趣我开始阅读官方文档深入了解一下这些库。作者无法将一个库讲的十分全面，这篇文章先对get请求进行介绍。如有疏漏 ，请多多包涵。官方库传送门">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-23T08:08:11.000Z">
+<meta property="article:modified_time" content="2020-07-24T14:14:52.907Z">
 <meta property="article:author" content="kooer">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Happy and Suffering Time" type="application/atom+xml">
@@ -150,36 +155,120 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-python1" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/23/python1/" class="archive-article-date">
-  	<time datetime="2020-07-23T08:08:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/23/python1/">爬虫（一）</a>
+    <h1 class="article-title" itemprop="name">
+      爬虫（一）
     </h1>
   
 
-        <div class="article-info info-on-right">
+  
+  <a href="/2020/07/23/python1/" class="archive-article-date">
+  	<time datetime="2020-07-23T08:08:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-23</time>
+</a>
+  
+    
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">921字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">3分</span>
+      </span>
+    </span>
+</div>
           
+    
+</header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>​    今天开始学习python中的request库进而开始学习数据爬取数据（爬虫），俗话说的好：<del>~ 爬虫学的好，坐牢做到老 ~</del> 。出于兴趣我开始阅读官方文档深入了解一下这些库。作者无法将一个库讲的十分全面，这篇文章先对get请求进行介绍。如有疏漏 ，请多多包涵。官方库<a href="https://requests.readthedocs.io/zh_CN/latest/" target="_blank" rel="noopener">传送门</a></p>
+<a id="more"></a>
+
+<p>  先介绍对不同网站请求（8种）。这里只介绍四种，其余四种感兴趣的读者可以点击<a href="https://www.cnblogs.com/songyao666/p/11453529.html" target="_blank" rel="noopener">传送门</a>进行查阅。</p>
+<ul>
+<li>GET:从网站取回数据（read）</li>
+<li>POST：创建一个实体通常用来上传文件（write）</li>
+<li>Put:向指定资源位置上传最新的内容（update）</li>
+<li>Delete:请求服务器删除request-url所标识的资源（delete）</li>
+</ul>
+<h2 id="建立实例"><a href="#建立实例" class="headerlink" title="建立实例"></a>建立实例</h2><pre><code>r=requests.get(&#39;https://www.baidu.com&#39;)
+#下面介绍requests.get()中的参数
+r=requests.get(url,params=None,**kwargs)
+返回的是个response对象</code></pre><p>  url：</p>
+<ul>
+<li><p><strong><em>定义</em></strong> ：在网络中的每一信息资源都有统一和在网络中的中的地址</p>
+</li>
+<li><p><strong><em>格式</em></strong>：protocol://hostname[:port]/path/ [;parameters][?query]#fragment（[]中的内容可有可无）</p>
+<ul>
+<li><p>protocol   :协议——制定在网络中传输的协议最常用的是HTTP协议      </p>
+</li>
+<li><p>hostname[:port]:存放资源的服务器的域名系统（DNS），主机名或者ip地址</p>
+<ul>
+<li>:port:端口号每个协议有他默认的端口号，但由于种种原因，我们可以在服务器中重新定义端口号</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>path：由零或多个‘/’分开开的字符串来表示资源在服务器的位置</p>
+<ul>
+<li><p>parameters:参数-用于指定参数查询</p>
+</li>
+<li><p>query：查询-用于动态网络查询，查询条件用’&amp;’隔开，查询的名与值用’=’连接</p>
+</li>
+<li><p>fragment:信息片段-用于指定网络中的信息片段</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>params：可选参数-字典，元组列表或者字节型数据（Dictionary, list of tuples or bytes to send）来插入query充当查询条件</p>
+<p>**kwargs：12个控制访问的参数</p>
+<h3 id="定制请求头"><a href="#定制请求头" class="headerlink" title="定制请求头"></a>定制请求头</h3><pre><code>&gt;&gt;&gt; headers={
+&#39;User-Agent&#39;: &#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36&#39;
+}
+&gt;&gt;&gt; url = &#39;https://api.github.com/some/endpoint&#39;
+&gt;&gt;&gt; html=requests.get(url=url,headers=headers)
+</code></pre><ul>
+<li>应用场景：在在很多网站中，会对请求头中的信息有所要求，或者是因为用作验证来反爬虫，或者是获得浏览器的信息以提供针对性的反馈等等，当缺少这些请求头信息时，有些网站可能会对请求不予反馈，或者返回错误信息。这就需要在通过代码访问的时候追加这些信息</li>
+</ul>
+<h2 id="实例的属性"><a href="#实例的属性" class="headerlink" title="实例的属性"></a>实例的属性</h2><pre><code>response=requests.get(&#39;https://www.baidu.com&#39;)
+##实例的属性
+response.status_code  #获取状态码
+response.url          #获取真实的url
+response.headers      #获取头部信息
+response.content      #以字节返回信息。一般用来存贮图片
+response.text         #以一定编码形式返回信息
+</code></pre><h3 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h3><pre><code>200:请求成功
+301/302;重定向
+403：禁止访问
+404：找不到资源
+405：请求方式不对（get/post）
+500:服务器问题
+502：bad getway 网关错误</code></pre><h3 id="text-与-content区别"><a href="#text-与-content区别" class="headerlink" title=".text 与.content区别"></a>.text 与.content区别</h3><p>  当我们使用<code>response=requests.get(&#39;https://www.baidu.com&#39;)</code>得到是一个response对象，里面包涵了从服务器中的获得所有信息包括响应头等等。response.content是以字节形式来显示。response.text 是根据对原始数据的猜测即响应头中的编码方式来对response.content来进行编码来返回字符串。但有时会发生错误，这是就得指定编码方式历来编码response.content(<code>response.content.decode(&#39;编码方式&#39;)</code>)。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -191,131 +280,146 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/23/python1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/10/pageblog/" class="archive-article-date">
-  	<time datetime="2020-06-10T07:09:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-10</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/06/10/pageblog/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">最尴尬标题来了</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/10/pageblog/">最尴尬标题来了</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/纪念//" class="article-tag-list-link color3">纪念</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建立实例"><span class="toc-number">2.</span> <span class="toc-text">建立实例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定制请求头"><span class="toc-number">2.1.</span> <span class="toc-text">定制请求头</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例的属性"><span class="toc-number">3.</span> <span class="toc-text">实例的属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#状态码"><span class="toc-number">3.1.</span> <span class="toc-text">状态码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#text-与-content区别"><span class="toc-number">3.2.</span> <span class="toc-text">.text 与.content区别</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/11/23/index/" class="archive-article-date">
-  	<time datetime="2018-11-23T13:07:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/23/index/">测试</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">测试</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/测试//" class="article-tag-list-link color3">测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
+
+<section id="comments" class="comments">
+  <style>
+    .comments{margin:30px;padding:10px;background:#fff}
+    @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+  </style>
+  <div id="vcomment" class="comment"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    var notify = 'false' == true ? true : false;
+    var verify = 'false' == true ? true : false;
+    window.onload = function () {
+        new Valine({
+            el: '#vcomment', // or '.comment'
+            notify: notify,
+            verify: verify,
+            app_id: "aPsHK31lmQqw9lbqkr5tjkfa-gzGzoHsz",
+            app_key: "dvJLzpDNcp8wVXbSYi3LDEuF",
+            placeholder: "Just go go",
+            avatar: "mm",
+        });
+    }
+</script>
+
+  </section>
+
 
 
           </div>
@@ -368,8 +472,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
