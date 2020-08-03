@@ -6,15 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: python | Happy and Suffering Time</title>
+  <title>进程（一） | Happy and Suffering Time</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Happy and Suffering Time">
-<meta property="og:url" content="http://yoursite.com/tags/python/index.html">
+  <meta name="description" content="传统计算机操作系统中，为了提高资源利用率和系统吐纳量，通常使用多道程序技术。多个程序装入内存，并发运行。此时作为资源分配和独立运行的基本单位即为进程。操作系统的四大特征（并发，共享，虚拟，异步）也是基于进程所描述的。因此想要深入理解操作系统，先要弄清楚进程。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进程（一）">
+<meta property="og:url" content="http://yoursite.com/2020/07/30/%E8%BF%9B%E7%A8%8B/index.html">
 <meta property="og:site_name" content="Happy and Suffering Time">
+<meta property="og:description" content="传统计算机操作系统中，为了提高资源利用率和系统吐纳量，通常使用多道程序技术。多个程序装入内存，并发运行。此时作为资源分配和独立运行的基本单位即为进程。操作系统的四大特征（并发，共享，虚拟，异步）也是基于进程所描述的。因此想要深入理解操作系统，先要弄清楚进程。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s1.ax1x.com/2020/08/01/a3eXeU.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/08/01/a3ZHbD.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/08/03/adu7ad.md.png">
+<meta property="article:published_time" content="2020-07-30T12:05:47.000Z">
+<meta property="article:modified_time" content="2020-08-03T14:01:37.756Z">
 <meta property="article:author" content="kooer">
+<meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/08/01/a3eXeU.png">
   
     <link rel="alternative" href="/atom.xml" title="Happy and Suffering Time" type="application/atom+xml">
   
@@ -150,60 +159,368 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-进程" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/23/python1/" class="archive-article-date">
-  	<time datetime="2020-07-23T08:08:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/23/python1/">爬虫（一）</a>
+    <h1 class="article-title" itemprop="name">
+      进程（一）
     </h1>
   
 
-        <div class="article-info info-on-right">
+  
+  <a href="/2020/07/30/%E8%BF%9B%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2020-07-30T12:05:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-30</time>
+</a>
+  
+    
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">2k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">6分</span>
+      </span>
+    </span>
+</div>
           
+    
+</header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<p>   传统计算机操作系统中，为了提高资源利用率和系统吐纳量，通常使用多道程序技术。多个程序装入内存，并发运行。此时作为资源分配和独立运行的基本单位即为<strong><em>进程</em></strong>。操作系统的四大特征（<strong>并发，共享，虚拟，异步</strong>）也是基于进程所描述的。因此想要深入理解操作系统，先要弄清楚进程。</p>
+<a id="more"></a>
+
+<h3 id="程序执行方式"><a href="#程序执行方式" class="headerlink" title="程序执行方式"></a>程序执行方式</h3><table>
+<thead>
+<tr>
+<th>程序执行方式</th>
+<th>应用的操作系统</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>顺序执行</td>
+<td>早期未配置os的系统和单道批处理系统</td>
+</tr>
+<tr>
+<td>并发执行</td>
+<td>多道程序系统</td>
+</tr>
+</tbody></table>
+<h4 id="顺序执行"><a href="#顺序执行" class="headerlink" title="顺序执行"></a>顺序执行</h4><p>   顺序执行：在内存中只装入一道用户程序即这一道程序独占所有资源，再它完成后下一道用户程序才能再进入内存。从中我们可以明显看出顺序执行的缺点：<strong>浪费资源并且系统运行效率低</strong>。</p>
+<h4 id="并发执行"><a href="#并发执行" class="headerlink" title="并发执行"></a>并发执行</h4><p>   并发执行：在多道程序系统中，我们在内存中装入多道程序，使他们共享资源，并发执行。从此我们看出：并发执行克服了顺序执行的缺点。</p>
+<h4 id="前驱图"><a href="#前驱图" class="headerlink" title="前驱图"></a>前驱图</h4><p>   为了更好的了解和描述顺序执行和并发执行的情况，我们用前趋图来描述这两种程序执行方式。<strong>前驱图</strong>（Precedence Graph) 是一个有向无环图，用来描述程序执行的先后情况。图中节点表示：一个进程或者程序段，甚至是一条语句。有向边来表示：节点之间的偏序或者前驱关系。-&gt;表示节点之间的前驱关系。例如：P <sub>i </sub>-&gt;P<sub>j</sub> 表示再P<sub>j</sub>执行之前先执行P<sub>i</sub>。</p>
+<h5 id="顺序执行前趋图"><a href="#顺序执行前趋图" class="headerlink" title="顺序执行前趋图"></a>顺序执行前趋图</h5><img src="https://s1.ax1x.com/2020/08/01/a3eXeU.png" alt="顺序执行前趋图.png" border="0" />
+
+
+
+
+<p>   由此我们可以看出顺序执行的特征：</p>
+<ul>
+<li><p>顺序性</p>
+</li>
+<li><p>封闭性：程序一旦执行，其执行结果不受外界元素影响</p>
+</li>
+<li><p>可再现性：只要程序执行的环境和初始条件相同，程序重复执行就可以得到相同结果</p>
+</li>
+</ul>
+<h5 id="并发执行前趋图"><a href="#并发执行前趋图" class="headerlink" title="并发执行前趋图"></a>并发执行前趋图</h5><img src="https://s1.ax1x.com/2020/08/01/a3ZHbD.png" alt="并发执行前趋图.png" border="0" />
+
+<p>  由此我们可以看出并发执行的特点：</p>
+<ul>
+<li>只有不存在前趋关系的程序才有可能并发执行</li>
+<li>间断性</li>
+<li>不可再现性</li>
+<li>失去封闭性<h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3></li>
+</ul>
+<p>进程是我们想要深入理解计算机操作系统中非常重要的一个概念。我们将会从一下几个角度来了解进程</p>
+<ul>
+<li><p>进程的定义</p>
+</li>
+<li><p>进程的特征</p>
+</li>
+<li><p>进程的状态以及状态之间的相互转化</p>
+</li>
+<li><p>进程控制</p>
+</li>
+</ul>
+<h4 id="进程的定义"><a href="#进程的定义" class="headerlink" title="进程的定义"></a>进程的定义</h4><p>​         什么是进程？为什么会有这样的概念？进程等不等于程序呢？从上文中我们知道了程序的并发执行有间断性，不可再现性和失去封闭性，这样通常程序就无法并发执行。如果并发执行，那么程序的执行就没有意义了。因此我们引入进程来使程序并发执行并加以描述。</p>
+<p>​        为了描述进程的基本情况和执行过程，进而我们可以更好的控制和管理进程。我们引入一个数据结构称之为进程控制块PCB(Process Control Block）。这样我们就可以更为清楚的了解进程包括了什么。由程序段，相关数据段和PCB构成一个进程实体（也称进程映像)，我们同常将进程实体简称为进程。这样我们即可对进程下一个定义：<strong>进程是进程实体的运行过程，是系统资源分配和调度的最基本单位</strong>。这样我们就解决我开头所提出的前两个问题。而程序与进程的区别现在我们可以模糊的感觉到不同，我们下面在进程的特征中可以更加的明确感受二者的不同。</p>
+<h4 id="进程的特征"><a href="#进程的特征" class="headerlink" title="进程的特征"></a>进程的特征</h4><ul>
+<li><p>动态性</p>
+</li>
+<li><p>并发性</p>
+</li>
+<li><p>独立性</p>
+</li>
+<li><p>异步性</p>
+</li>
+</ul>
+<h5 id="动态性"><a href="#动态性" class="headerlink" title="动态性"></a>动态性</h5><ul>
+<li><p>进程的实质是进程实体的执行过程。<strong>进程由创建而产生，由调度而执行，由撤销而消亡</strong>，  具有一定的生命周期。</p>
+</li>
+<li><p>程序：一定数量的指令集合存放于某种介质上。静态的</p>
+</li>
+</ul>
+<h5 id="并发性"><a href="#并发性" class="headerlink" title="并发性"></a>并发性</h5><ul>
+<li><p>进程：我们引入进程的概念就是为了使存在于内存的多个进程实体可以并发执行。</p>
+</li>
+<li><p>程序：没有PCB，无法并发执行</p>
+</li>
+</ul>
+<h5 id="独立性"><a href="#独立性" class="headerlink" title="独立性"></a>独立性</h5><ul>
+<li><p>进程：进程实体是一个可以独立运行，独立接受调度和独立接受资源的单位</p>
+</li>
+<li><p>程序：未创建PCB的程序都不能作为一个独立单位参与运行</p>
+</li>
+</ul>
+<h5 id="异步性"><a href="#异步性" class="headerlink" title="异步性"></a>异步性</h5><ul>
+<li><p>进程：进程按着异步方式运行，即按着各自独立，不可预知速度方式运行。为了使进程在并发执行中的具有异步性，在OS 中引进进程的概念，并配置进程同步机制</p>
+</li>
+<li><p>程序：如果按着异步方式，程序运行得到结果存在不可再现性</p>
+<h4 id="进程的状态"><a href="#进程的状态" class="headerlink" title="进程的状态"></a>进程的状态</h4><p>由于多个进程在并发执行中共享资源，致使进程在运行过程中呈现间断性，这样表现出来进程会出现多个状态</p>
+</li>
+</ul>
+<p>下面来介绍这些状态</p>
+<ul>
+<li>就绪态：进程除了cpu以外的所有资源全部已经得到。只要再获得CPU 资源，该进程就可以执行。通常处于就绪态的进程会以一定策略处于一个就绪队列。</li>
+<li>执行态：进程已经获得所有资源，程序正在执行</li>
+<li>阻塞态：正在执行态 的进程由于某种事件发生，而无法执行。</li>
+<li>创建态：进程创建过程<ul>
+<li>申请一个PCB并向PCB中写入控制和管理信息 </li>
+<li>然后分配资源，转入就绪态<br>​              进程所需资源不够分配给进程，此时创建工程还没完成这样我们就可以称之为创建态</li>
+</ul>
+</li>
+<li>终止态：将进程的PCB撤销</li>
+</ul>
+<h5 id="挂起操作"><a href="#挂起操作" class="headerlink" title="挂起操作"></a>挂起操作</h5><p>作用于某个进程使其处于静止状态。</p>
+<ul>
+<li><p>该进程处于执行态：会暂停执行</p>
+</li>
+<li><p>处于就绪态：不接受调度</p>
+</li>
+</ul>
+<h6 id="引入挂起操作的原因"><a href="#引入挂起操作的原因" class="headerlink" title="引入挂起操作的原因"></a>引入挂起操作的原因</h6><ul>
+<li>终端用户的需求</li>
+<li>父进程的要求</li>
+<li>负荷调节的需要</li>
+<li>操作系统的需要</li>
+</ul>
+<h5 id="进程状态的转换"><a href="#进程状态的转换" class="headerlink" title="进程状态的转换"></a>进程状态的转换</h5><p><a href="https://imgchr.com/i/adu7ad" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/08/03/adu7ad.md.png" alt="进程转换图.png" border="0" /></a></p>
+<h4 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h4><p>一些事件会引起进程状态的改变下面就来介绍一下这些事件</p>
+<p>1.引起创建进程的事件：</p>
+<ul>
+<li>用户登陆</li>
+<li>作业调度</li>
+<li>提供服务</li>
+<li>应用请求：前三者式系统为用户建立新进程，而应用请求则是用户为自己创建进程</li>
+</ul>
+<p>2.引起进程终止的事件</p>
+<ul>
+<li>正常结束</li>
+<li>异常结束：运行过程中发生异常事件，致使程序停止运行<ul>
+<li>越界错：程序访问到该进程所需资源外的存储区</li>
+<li>保护错：进程视图访问一个不允许访问的文件或者以一个不正常的访问方式</li>
+<li>非法指令：指令不存在</li>
+<li>特权指令错：进程试图执行OS 指令</li>
+<li>运行超时：程序运行事件超出最大时间</li>
+<li>等待超时：进程等待某事件超出最大时间</li>
+<li>算术运算错：进程试图执行一个不被允许执行的算术运算</li>
+<li>I/O故障：I/O过程中发生错误</li>
+</ul>
+</li>
+<li>外界干预：应外界请求而终止进程<ul>
+<li>操作员或者操作系统的干预</li>
+<li>父进程的请求</li>
+<li>因父进程终止</li>
+</ul>
+</li>
+</ul>
+<p>3.引起进程的阻塞和唤醒的事件</p>
+<ul>
+<li>向系统请求资源失败</li>
+<li>等待某种操作的执行</li>
+<li>新数据尚未到达</li>
+<li>等待新任务的到达</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/07/30/%E8%BF%9B%E7%A8%8B/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/07/23/python1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">爬虫（一）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#程序执行方式"><span class="toc-number">1.</span> <span class="toc-text">程序执行方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#顺序执行"><span class="toc-number">1.1.</span> <span class="toc-text">顺序执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#并发执行"><span class="toc-number">1.2.</span> <span class="toc-text">并发执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#前驱图"><span class="toc-number">1.3.</span> <span class="toc-text">前驱图</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#顺序执行前趋图"><span class="toc-number">1.3.1.</span> <span class="toc-text">顺序执行前趋图</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#并发执行前趋图"><span class="toc-number">1.3.2.</span> <span class="toc-text">并发执行前趋图</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程"><span class="toc-number">2.</span> <span class="toc-text">进程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#进程的定义"><span class="toc-number">2.1.</span> <span class="toc-text">进程的定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程的特征"><span class="toc-number">2.2.</span> <span class="toc-text">进程的特征</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#动态性"><span class="toc-number">2.2.1.</span> <span class="toc-text">动态性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#并发性"><span class="toc-number">2.2.2.</span> <span class="toc-text">并发性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#独立性"><span class="toc-number">2.2.3.</span> <span class="toc-text">独立性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#异步性"><span class="toc-number">2.2.4.</span> <span class="toc-text">异步性</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程的状态"><span class="toc-number">2.3.</span> <span class="toc-text">进程的状态</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#挂起操作"><span class="toc-number">2.3.1.</span> <span class="toc-text">挂起操作</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#引入挂起操作的原因"><span class="toc-number">2.3.1.1.</span> <span class="toc-text">引入挂起操作的原因</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#进程状态的转换"><span class="toc-number">2.3.2.</span> <span class="toc-text">进程状态的转换</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程控制"><span class="toc-number">2.4.</span> <span class="toc-text">进程控制</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
+
+<section id="comments" class="comments">
+  <style>
+    .comments{margin:30px;padding:10px;background:#fff}
+    @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+  </style>
+  <div id="vcomment" class="comment"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    var notify = 'false' == true ? true : false;
+    var verify = 'false' == true ? true : false;
+    window.onload = function () {
+        new Valine({
+            el: '#vcomment', // or '.comment'
+            notify: notify,
+            verify: verify,
+            app_id: "aPsHK31lmQqw9lbqkr5tjkfa-gzGzoHsz",
+            app_key: "dvJLzpDNcp8wVXbSYi3LDEuF",
+            placeholder: "Just go go",
+            avatar: "mm",
+        });
+    }
+</script>
+
+  </section>
+
 
 
           </div>
@@ -258,9 +575,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
